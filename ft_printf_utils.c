@@ -6,11 +6,12 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 17:17:07 by ufalzone          #+#    #+#             */
-/*   Updated: 2024/11/17 19:49:05 by ufalzone         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:19:02 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdlib.h>
 
 int	ft_putchar(char c)
 {
@@ -49,11 +50,12 @@ int	ft_putnbr(int n)
 	if (n < 0)
 	{
 		ft_putchar('-');
+        n = -n;
 		i++;
 	}
 	if (n >= 10)
-		ft_putnbr(n / 10);
-	ft_putchar(n % 10 + '0');
+		i+=ft_putnbr(n / 10);	
+    ft_putchar(n % 10 + '0');
 	i++;
 	return (i);
 }
@@ -64,8 +66,8 @@ int	ft_putnbr_base(size_t n, char *base)
 	i = 0;
 	if (n >= 16)
     {
-		ft_putnbr_base(n / 16, base);
-        i++;
+		i+=ft_putnbr_base(n / 16, base);
+        
     }
     ft_putchar(base[n % 16]);
 	i++;

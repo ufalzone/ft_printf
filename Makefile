@@ -6,7 +6,7 @@
 #    By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/17 19:50:55 by ufalzone          #+#    #+#              #
-#    Updated: 2024/11/17 20:00:26 by ufalzone         ###   ########.fr        #
+#    Updated: 2024/11/17 20:03:43 by ufalzone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,9 @@ OBJ = ${FILE:.c=.o}
 all:${NAME}
 
 ${NAME}:${OBJ}
-	ar -crs ${NAME} ${OBJ}
+	ar -rcs ${NAME} ${OBJ}
 %.o:%.c
-	${CC} ${FALG} ${FILE}
+	${CC} -c ${FLAG} $<
 clean:
 	rm -f ${OBJ}
 fclean:clean

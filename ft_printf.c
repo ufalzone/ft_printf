@@ -6,7 +6,7 @@
 /*   By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 12:14:04 by ufalzone          #+#    #+#             */
-/*   Updated: 2024/11/17 19:50:17 by ufalzone         ###   ########.fr       */
+/*   Updated: 2024/11/17 20:27:49 by ufalzone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_printf(const char *format, ...)
 
 	i = 0;
 	len = ft_strlen(format);
-    size = 0;
+	size = 0;
 	va_start(ap, format);
 	while (i < len)
 	{
@@ -46,8 +46,8 @@ int	ft_printf(const char *format, ...)
 			else if (format[i + 1] == 'p')
 			{
 				ft_putstr("0x");
-				(size += ft_putnbr_base((size_t)va_arg(ap, size_t), "0123456789abcdef")
-					+ 5);
+				(size += ft_putnbr_base((size_t)va_arg(ap, size_t),
+						"0123456789abcdef") + 2);
 			}
 			else if (format[i + 1] == 'd' || format[i + 1] == 'i')
 				size += ft_putnbr(va_arg(ap, int));
@@ -78,11 +78,9 @@ int	ft_printf(const char *format, ...)
 int	main(void)
 {
 	int	x;
-	int	*c;
-
-	x = 5;
-	c = &x;
-	ft_printf("%p", &c);
-	printf("\n");
-	printf("%p", &c);
+	
+    x = -5;
+	ft_printf(" %u ", -1);
+    ft_printf("\n");
+	printf(" %u ", -1);
 }
