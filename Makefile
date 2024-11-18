@@ -6,28 +6,36 @@
 #    By: ufalzone <ufalzone@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/17 19:50:55 by ufalzone          #+#    #+#              #
-#    Updated: 2024/11/17 20:03:43 by ufalzone         ###   ########.fr        #
+#    Updated: 2024/11/18 13:43:55 by ufalzone         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
-
 CC = cc
-FLAG = -Wall -Werror -Wextra
+CFLAGS = -Wall -Wextra -Werror -I./includes
 
-FILE = ft_printf.c ft_printf_utils.c
-OBJ = ${FILE:.c=.o}
+SRCS = srcs/core/ft_printf.c \
+       srcs/utils/ft_numbers_utils.c \
+       srcs/utils/ft_strings_utils.c \
+       srcs/utils/ft_hex_utils.c \
+	   srcs/utils/ft_redirect_utils.c
 
-all:${NAME}
+OBJS = $(SRCS:.c=.o)
 
-${NAME}:${OBJ}
-	ar -rcs ${NAME} ${OBJ}
-%.o:%.c
-	${CC} -c ${FLAG} $<
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
+
+%.o: %.c includes/ft_printf.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f ${OBJ}
-fclean:clean
-	rm -f ${NAME}
-re:fclean all
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
 
 .PHONY: all clean fclean re
